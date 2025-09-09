@@ -1,0 +1,4 @@
+name: Template
+version: '1.0-SNAPSHOT'
+main: dittonut.template.Template
+api-version: '1.21'
