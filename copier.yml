@@ -1,0 +1,36 @@
+name:
+  type: str
+  help: Project or plugin name
+  validator: >-
+    {% if not name or ' ' in name %}
+    Name cannot be blank or contain spaces
+    {% endif %}
+
+mcVersion:
+  type: str
+  help: Minecraft version
+  validator: >-
+    {% if not name or not name|replace('.', '')|isdigit %}
+    Version can only contain digits and dots
+    {% endif %}
+
+group:
+  type: str
+  help: Lowercase group name (letters only), used in package <group>.<simpleName>
+  validator: >-
+    {% if not name or name|lower != name or name|replace('', '')|regex_search('[^a-z]') %}
+    Group must contain only lowercase letters
+    {% endif %}
+
+simpleName:
+  type: str
+  help: Lowercase project name (letters only), used in package and commands
+  validator: >-
+    {% if not name or name|lower != name or name|replace('', '')|regex_search('[^a-z]') %}
+    Name must contain only lowercase letters
+    {% endif %}
+
+
+_envops:
+  variable_start_string: '__'
+  variable_end_string: '__'
