@@ -10,7 +10,7 @@ mcVersion:
   type: str
   help: Minecraft version
   validator: >-
-    {% if not name or not (name | replace('.', '') | regex_search('^[0-9]+$')) %}
+    {% if version is regex_search(r'^\d+\.\d+(\.\d+)?$') %}
     Version can only contain digits and dots
     {% endif %}
 
