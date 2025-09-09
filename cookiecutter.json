@@ -1,0 +1,11 @@
+{
+  "name": "Template",
+  "group": "dittonut",
+  "simpleName": "template",
+  "mcVersion": "1.21.8",
+
+  "_jinja2_env_vars": {
+    "variable_start_string": "__",
+    "variable_end_string": "__"
+  }
+}
