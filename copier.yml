@@ -31,6 +31,19 @@ simpleName:
     {% endif %}
 
 
+_templates_suffix: ''
+exclude:
+  - copier.yaml
+  - copier.yml
+  - ~*
+  - .git
+  - .DS_Store
+  - .svn
+  - .gitignore
+  - gradlew
+  - gradlew.bat
+  - gradle/wrapper/gradle-wrapper.jar
+  - gradle/wrapper/gradle-wrapper.properties
 _envops:
   variable_start_string: '__'
   variable_end_string: '__'
