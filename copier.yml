@@ -30,20 +30,6 @@ simpleName:
     Name must contain only lowercase letters
     {% endif %}
 
-
-_templates_suffix: ''
-exclude:
-  - copier.yaml
-  - copier.yml
-  - ~*
-  - .git
-  - .DS_Store
-  - .svn
-  - .gitignore
-  - gradlew
-  - gradlew.bat
-  - gradle/wrapper/gradle-wrapper.jar
-  - gradle/wrapper/gradle-wrapper.properties
-_envops:
-  variable_start_string: '__'
-  variable_end_string: '__'
+_exclude: ["copier.yaml", "copier.yml", "~*", "*.py[co]", "__pycache__", ".git", ".DS_Store", ".svn",
+           ".gradle", ".idea", ".kotlin", "build"]
+_templates_suffix: '.template'

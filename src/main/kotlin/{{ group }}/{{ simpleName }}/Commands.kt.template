@@ -1,0 +1,26 @@
+package {{ group }}.{{ simpleName }}
+
+import io.papermc.paper.command.brigadier.CommandSourceStack
+import org.incendo.cloud.CommandManager
+import org.incendo.cloud.kotlin.extension.buildAndRegister
+
+fun registerCommands(manager: CommandManager<CommandSourceStack>) {
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} config save
+        literal("config")
+        literal("reload")
+        permission("{{ simpleName }}.config.reload")
+        handler { ctx ->
+            ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Reloading config.yml!".parseMM())
+            ConfigManager.load()
+        }
+    }
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} config save
+        literal("config")
+        literal("save")
+        permission("{{ simpleName }}.config.save")
+        handler { ctx ->
+            ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Saving config.yml!".parseMM())
+            ConfigManager.save()
+        }
+    }
+}
