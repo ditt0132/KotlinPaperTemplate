@@ -5,7 +5,7 @@ import org.incendo.cloud.CommandManager
 import org.incendo.cloud.kotlin.extension.buildAndRegister
 
 fun registerCommands(manager: CommandManager<CommandSourceStack>) {
-    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} config save
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} config reload
         literal("config")
         literal("reload")
         permission("{{ simpleName }}.config.reload")
