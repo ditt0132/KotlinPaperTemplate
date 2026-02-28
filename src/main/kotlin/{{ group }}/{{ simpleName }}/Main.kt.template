@@ -6,7 +6,6 @@ import org.incendo.cloud.execution.ExecutionCoordinator
 import org.incendo.cloud.paper.PaperCommandManager
 import java.util.logging.Logger
 
-
 lateinit var plugin: Main
     private set
 lateinit var logger: Logger
@@ -21,10 +20,10 @@ class Main : JavaPlugin() {
         {{ group }}.{{ simpleName }}.logger = logger
 
         if (!dataFolder.exists()) dataFolder.mkdirs()
-        ConfigManager.load()
+        ConfigManager.loadAll()
         server.scheduler.runTaskTimer(this, Runnable {
-            ConfigManager.save()
-        }, 0L, 600L) // 600틱 = 30초
+            ConfigManager.saveAll()
+        }, 0L, 600L) // 600t = 30s
 
         val commandManager = PaperCommandManager.builder()
             .executionCoordinator(ExecutionCoordinator.simpleCoordinator())
@@ -38,6 +37,6 @@ class Main : JavaPlugin() {
 
     override fun onDisable() {
         // Plugin shutdown logic
-        ConfigManager.save()
+        ConfigManager.saveAll()
     }
 }

@@ -5,22 +5,64 @@ import org.incendo.cloud.CommandManager
 import org.incendo.cloud.kotlin.extension.buildAndRegister
 
 fun registerCommands(manager: CommandManager<CommandSourceStack>) {
-    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} config reload
-        literal("config")
+    registerConfigCommands(manager)
+}
+
+fun registerConfigCommands(manager: CommandManager<CommandSourceStack>) {
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} reload config
         literal("reload")
-        permission("{{ simpleName }}.config.reload")
+        literal("config")
+        permission("{{ simpleName }}.reload.config")
         handler { ctx ->
             ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Reloading config.yml!".parseMM())
-            ConfigManager.load()
+            ConfigManager.loadConfig()
         }
     }
-    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} config save
-        literal("config")
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} save config
         literal("save")
-        permission("{{ simpleName }}.config.save")
+        literal("config")
+        permission("{{ simpleName }}.save.config")
         handler { ctx ->
             ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Saving config.yml!".parseMM())
-            ConfigManager.save()
+            ConfigManager.saveConfig()
+        }
+    }
+
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} reload data
+        literal("reload")
+        literal("data")
+        permission("{{ simpleName }}.reload.data")
+        handler { ctx ->
+            ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Reloading data.yml!".parseMM())
+            ConfigManager.loadData()
+        }
+    }
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} save data
+        literal("save")
+        literal("data")
+        permission("{{ simpleName }}.save.data")
+        handler { ctx ->
+            ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Saving data.yml!".parseMM())
+            ConfigManager.saveData()
+        }
+    }
+
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} reload all
+        literal("reload")
+        literal("all")
+        permission("{{ simpleName }}.reload.all")
+        handler { ctx ->
+            ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Reloading data.yml, config.yml!".parseMM())
+            ConfigManager.loadAll()
+        }
+    }
+    manager.buildAndRegister("{{ simpleName }}") { // {{ simpleName }} save all
+        literal("save")
+        literal("all")
+        permission("{{ simpleName }}.save.all")
+        handler { ctx ->
+            ctx.sender().sender.sendMessage("<green>[{{ name }}]</green> Saving data.yml, config.yml!".parseMM())
+            ConfigManager.saveAll()
         }
     }
 }

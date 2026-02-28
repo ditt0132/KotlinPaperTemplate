@@ -8,25 +8,51 @@ import java.io.File
 lateinit var config: Config
     private set
 
+lateinit var data: Data
+    private set
+
 @Serializable
 data class Config(
     val version: Int = 1,
     )
 
+@Serializable
+data class Data(
+    val version: Int = 1,
+    )
+
 object ConfigManager {
     private val yaml = Yaml()
-    val file = File(plugin.dataFolder, "config.yml")
+    val configFile = File(plugin.dataFolder, "config.yml")
+    val dataFile = File(plugin.dataFolder, "data.yml")
 
-    fun load() {
-        config = if (file.exists()) yaml.decodeFromString(Config.serializer(), file.readText())
+    fun loadAll() { loadConfig(); loadData() }
+
+    fun loadConfig() {
+        config = if (configFile.exists()) yaml.decodeFromString(Config.serializer(), configFile.readText())
                  else Config()
-        save()
+        saveConfig()
     }
 
-    fun save() {
+    fun loadData() {
+        data = if (dataFile.exists()) yaml.decodeFromString(Data.serializer(), dataFile.readText())
+                 else Data()
+        saveData()
+    }
+
+    fun saveAll() { saveConfig(); saveData() }
+
+    fun saveConfig() {
         val snapshot = config.copy() // safe snapshot
         Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
-            file.writeText(yaml.encodeToString(Config.serializer(), snapshot))
+            configFile.writeText(yaml.encodeToString(Config.serializer(), snapshot))
+        })
+    }
+
+    fun saveData() {
+        val snapshot = data.copy() // safe snapshot
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
+            dataFile.writeText(yaml.encodeToString(Data.serializer(), snapshot))
         })
     }
 }
