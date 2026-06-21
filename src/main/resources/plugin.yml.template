@@ -6,3 +6,24 @@ libraries:
   - org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2
   - org.jetbrains.kotlinx:kotlinx-serialization-core:1.10.0
   - org.jetbrains.kotlin:kotlin-stdlib:2.3.10
+permissions:
+  {{ simpleName }}.save.config:
+    default: op
+  {{ simpleName }}.reload.config:
+    default: op
+
+  {{ simpleName }}.save.data:
+    default: op
+  {{ simpleName }}.reload.data:
+    default: op
+
+  {{ simpleName }}.save.all:
+    default: op
+    children:
+      {{ simpleName }}.save.data: true
+      {{ simpleName }}.save.config: true
+  {{ simpleName }}.reload.all:
+    default: op
+    children:
+      {{ simpleName }}.reload.data: true
+      {{ simpleName }}.reload.config: true
