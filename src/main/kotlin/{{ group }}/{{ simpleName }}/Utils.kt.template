@@ -1,3 +1,5 @@
 package {{ group }}.{{ simpleName }}
 
-fun String.parseMM() = mm.deserialize(this)
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
+
+fun String.parseMM(vararg tags: TagResolver) = mm.deserialize(this, *tags)
